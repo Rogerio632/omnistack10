@@ -11,11 +11,6 @@ async index (req, res){
 
   const techsArray = StringToArray(techs);
 
-  const location = {
-    type: 'Point',
-    coordinates: [longitude, latitude],
-  };
-
   const devs = await Dev.find({
     techs: {
       $in: techsArray,
