@@ -38,8 +38,54 @@ return(
 
   </aside>
 
-  <main>
-
+  <main> 
+  <ul>
+    <li className="dev-item">
+      <header>
+        <img src="https://avatars3.githubusercontent.com/u/48360931?s=460&v=4" alt="Imagem de usuário"/>
+      <div className="user-info">
+        <strong>Rogério De Oliveira</strong>
+        <span>ReactJS, React Native, NodeJS</span>
+      </div>
+      </header>
+      <p>Do. Or do not. There is no try.</p>
+      <a href="https://github.com/rogerio632">Acessar perfil do Github</a>
+    </li>
+    <li className="dev-item">
+      <header>
+        <img src="https://avatars3.githubusercontent.com/u/48360931?s=460&v=4" alt="Imagem de usuário"/>
+      <div className="user-info">
+        <strong>Rogério De Oliveira</strong>
+        <span>ReactJS, React Native, NodeJS</span>
+      </div>
+      </header>
+      <p>Do. Or do not. There is no try.</p>
+      <a href="https://github.com/rogerio632">Acessar perfil do Github</a>
+    </li>
+    <li className="dev-item">
+      <header>
+        <img src="https://avatars3.githubusercontent.com/u/48360931?s=460&v=4" alt="Imagem de usuário"/>
+      <div className="user-info">
+        <strong>Rogério De Oliveira</strong>
+        <span>ReactJS, React Native, NodeJS</span>
+      </div>
+      </header>
+      <p>Do. Or do not. There is no try.</p>
+      <a href="https://github.com/rogerio632">Acessar perfil do Github</a>
+    </li>
+    <li className="dev-item">
+      <header>
+        <img src="https://avatars3.githubusercontent.com/u/48360931?s=460&v=4" alt="Imagem de usuário"/>
+      <div className="user-info">
+        <strong>Rogério De Oliveira</strong>
+        <span>ReactJS, React Native, NodeJS</span>
+      </div>
+      </header>
+      <p>Do. Or do not. There is no try.</p>
+      <a href="https://github.com/rogerio632">Acessar perfil do Github</a>
+    </li>
+    
+  </ul>
   </main>
 
   </Container>
