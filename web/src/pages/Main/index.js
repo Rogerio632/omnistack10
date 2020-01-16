@@ -1,96 +1,139 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from './styles';
+import { api } from '../../services/api';
 
-function Main(){
-return(
+function Main() {
 
-  <Container id="app">
-    
-  <aside className="main-aside">
-    <strong>Cadastrar</strong>
+  const [github_username, setUserName] = useState('');
+  const [techs, setTechs] = useState('');
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
 
-  <form>
-    <div className="input-block">
-    <label htmlFor="github_username">Usuário do Github</label>
-    <input name="github_username" id="github_username" required />
-    </div>
+  /**
+   * -> Executa uma função que retorna um callback(sucess - error)
+   * -> o primeiro parâmetro denota
+   */
 
-    <div className="input-block">
-    <label htmlFor="techs">Tecnologias</label>
-    <input name="techs" id="techs" required />
-    </div>
+   useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
 
-    <div className="input-group">
-    <div className="input-block">
-    <label htmlFor="latitude">Latitude</label>
-    <input name="latitude" id="latitude" required />
-    </div>
+        setLatitude(latitude);
+        setLongitude(longitude);
 
-    <div className="input-block">
-    <label htmlFor="longitude">Longitude</label>
-    <input name="longitude" id="longitude" required />
-    </div>
-    </div>
+        console.log(`latitude: ${latitude} / longitude: ${longitude}`);
+      },
+      (err) => {
+        console.log(err);
+      },
+      {
+        timeout: 30000,
+      },
+    )
+  }, []);
 
-  <button type="submit">Salvar</button>
+  async function handleSubmit(e){
+    e.preventDefault();
 
-  </form>
+    const response = await api.post('/devs', {
+      github_username,
+      techs,
+      latitude,
+      longitude
+    });
 
-  </aside>
+    setUserName('');
+    setTechs('');
 
-  <main> 
-  <ul>
-    <li className="dev-item">
-      <header>
-        <img src="https://avatars3.githubusercontent.com/u/48360931?s=460&v=4" alt="Imagem de usuário"/>
-      <div className="user-info">
-        <strong>Rogério De Oliveira</strong>
-        <span>ReactJS, React Native, NodeJS</span>
-      </div>
-      </header>
-      <p>Do. Or do not. There is no try.</p>
-      <a href="https://github.com/rogerio632">Acessar perfil do Github</a>
-    </li>
-    <li className="dev-item">
-      <header>
-        <img src="https://avatars3.githubusercontent.com/u/48360931?s=460&v=4" alt="Imagem de usuário"/>
-      <div className="user-info">
-        <strong>Rogério De Oliveira</strong>
-        <span>ReactJS, React Native, NodeJS</span>
-      </div>
-      </header>
-      <p>Do. Or do not. There is no try.</p>
-      <a href="https://github.com/rogerio632">Acessar perfil do Github</a>
-    </li>
-    <li className="dev-item">
-      <header>
-        <img src="https://avatars3.githubusercontent.com/u/48360931?s=460&v=4" alt="Imagem de usuário"/>
-      <div className="user-info">
-        <strong>Rogério De Oliveira</strong>
-        <span>ReactJS, React Native, NodeJS</span>
-      </div>
-      </header>
-      <p>Do. Or do not. There is no try.</p>
-      <a href="https://github.com/rogerio632">Acessar perfil do Github</a>
-    </li>
-    <li className="dev-item">
-      <header>
-        <img src="https://avatars3.githubusercontent.com/u/48360931?s=460&v=4" alt="Imagem de usuário"/>
-      <div className="user-info">
-        <strong>Rogério De Oliveira</strong>
-        <span>ReactJS, React Native, NodeJS</span>
-      </div>
-      </header>
-      <p>Do. Or do not. There is no try.</p>
-      <a href="https://github.com/rogerio632">Acessar perfil do Github</a>
-    </li>
-    
-  </ul>
-  </main>
+    console.log(response.data);
 
-  </Container>
+  }
 
-);
+  return (
+
+    <Container id="app">
+
+      <aside className="main-aside">
+        <strong>Cadastrar</strong>
+
+        <form onSubmit={handleSubmit}>
+          <div className="input-block">
+            <label htmlFor="github_username">Usuário do Github</label>
+            <input
+             name="github_username"
+              id="github_username"
+               required
+               value={github_username}
+               onChange={e => setUserName(e.target.value)}
+               />
+          </div>
+
+          <div className="input-block">
+            <label htmlFor="techs">Tecnologias</label>
+            <input
+             name="techs"
+              id="techs"
+               required
+               value={techs}
+               onChange={e => setTechs(e.target.value)}
+               />
+          </div>
+
+          <div className="input-group">
+            <div className="input-block">
+              <label htmlFor="latitude">Latitude</label>
+              <input
+
+                name="latitude"
+                 id="latitude"
+                  value={latitude}
+                  onChange={e => setLatitude(e.target.value)}
+                  required
+                    />
+            </div>
+
+
+            <div className="input-block">
+              <label htmlFor="longitude">Longitude</label>
+              <input
+               type="number"
+                name="longitude"
+                 id="longitude"
+                  onChange={e => setLongitude(e.target.value) }
+                   required
+                    value={longitude}
+                     />
+            </div>
+          </div>
+
+          <button type="submit">Salvar</button>
+
+        </form>
+
+      </aside>
+
+      <main>
+        <ul>
+
+          <li className="dev-item">
+            <header>
+              <img src="https://avatars3.githubusercontent.com/u/48360931?s=460&v=4" alt="Imagem de usuário" />
+              <div className="user-info">
+                <strong>Rogério De Oliveira</strong>
+                <span>ReactJS, React Native, NodeJS</span>
+              </div>
+            </header>
+            <p>Do. Or do not. There is no try.</p>
+            <a href="https://github.com/rogerio632">Acessar perfil do Github</a>
+          </li>
+
+        </ul>
+      </main>
+
+    </Container>
+
+  );
 
 }
 
