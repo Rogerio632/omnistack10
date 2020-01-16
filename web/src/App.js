@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
+import GlobalStyle from './styles/global';
+import Routes from './routes';
+
 
 /**
  *  Componente => bloco isolado de HTML/CSS/JS, o qual não interfere
@@ -11,22 +14,13 @@ import React, { useState } from 'react';
  *            alterado criando um novo state).
  **/
 
-
-
 function App() {
-  const [state, setState] = useState(10);
-
-  function increment() {
-    setState(state + 1);
-  }
-
-  return (
+  return(
     <>
-      <h1>Contador: {state}</h1>
-      <button type="button" onClick={increment}>Incrementar</button>
+   <GlobalStyle />
+    <Routes />
     </>
-  );
-
-}
-
-export default App;
+    );
+  }
+  
+    export default App;
