@@ -21,7 +21,9 @@ async store(req, res){
 
   const { login, name = login, bio, avatar_url } = response.data;
 
-  let dev = await Dev.findOne({ github_username });
+  let formatedLogin = github_username.toLowerCase();
+
+  let dev = await Dev.findOne({ formatedLogin });
 
   if(dev){
     return res.json({error: "You are already registered in this website"});
