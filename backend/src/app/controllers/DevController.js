@@ -21,12 +21,12 @@ async store(req, res){
 
   const { login, name = login, bio, avatar_url } = response.data;
 
-  let formatedLogin = github_username.toLowerCase();
+  let username_formated = github_username.toLowerCase();
 
-  let dev = await Dev.findOne({ formatedLogin });
+  let dev = await Dev.findOne({ github_username: username_formated });
 
   if(dev){
-    return res.json({error: "You are already registered in this website"});
+    return res.status(400).json({error: "You are already registered in this website"});
   }
 
   // trim() elimina espaçamentos antes e depois do elemento
@@ -42,7 +42,7 @@ async store(req, res){
   };
 
     dev = await Dev.create({
-     github_username,
+     github_username: username_formated,
      name,
      avatar_url,
      bio,
