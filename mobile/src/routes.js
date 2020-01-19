@@ -13,7 +13,10 @@ const Routes = createAppContainer(
         headerTitleAlign: "center",
       },
     },
-    Profile,
+    Profile: {
+      screen: Profile,
+      title: 'Perfil do Github'
+    },
   },
     {
       defaultNavigationOptions: {
