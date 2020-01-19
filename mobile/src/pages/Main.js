@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Image, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
-import api from '../services/api';
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 import { MaterialIcons } from '@expo/vector-icons';
+import api from '../services/api';
 
 
 const styles = StyleSheet.create({
@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
   }
 });
 
+
 function Main({ navigation }){
 
   const [currentRegion, setCurrentRegion] = useState(null);
@@ -80,9 +81,12 @@ function Main({ navigation }){
         const { coords } = await getCurrentPositionAsync({
           enableHighAccuracy: true,
         });
-      
+        
+      async function loadDevs(){
       const { latitude, longitude } = coords;
-
+    
+        
+    }
       setCurrentRegion({
         latitude,
         longitude,
